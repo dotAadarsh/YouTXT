@@ -4,7 +4,9 @@ YouTXT is an app that convert any YouTube video to text and it provides the belo
 - Summary [TL;DR]
 - Search [Search the word in the video]
 - Markdown editor
+
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/dotaadarsh/YouTXT)
+
 ## Working
 
 ### Packages 
@@ -15,14 +17,14 @@ YouTXT is an app that convert any YouTube video to text and it provides the belo
 - [Deepgram](https://github.com/deepgram/deepgram-python-sdk) - Python SDK for [Deepgram](https://deepgram.com/)'s automated speech recognition APIs. 
 
 ### API's
-Deepgram - Get yours at - https://console.deepgram.com/
-OpenAI’s API - Get yours at - https://openai.com/api/
+- Deepgram - Get yours at - https://console.deepgram.com/
+- OpenAI’s API - Get yours at - https://openai.com/api/
 
-###  Process
-- Get the URL From the user
-- Extracts the audio from the provided URL using YouTube-dl 
-- Sends the extracted audio to the Deepgram
+###  What it does?
+- Get the URL From the user.
+- Extracts the audio from the provided URL using YouTube-dl.
+- Sends the extracted audio to the Deepgram.
 - Deepgram provides the transcription and summary of the provided audio.
-- With the help of OpenAI, the list of keywords are identifiesd [It can actually do more than that]
+- With the help of OpenAI, the list of keywords are identified [It can actually do more than that].
 - By mapping the each word with the start time, a search dict is created. With the help of this the user can search the video by providing the word.
 - By passing the transcription to the Quill editor, the user is now able to modify it and do whatever he wants with the text.
