@@ -43,7 +43,7 @@ def markdown(text):
 
             if content:
                 st.subheader("Content")
-                st.write(content)
+                st.magic(content)
 
 async def transcribe(PATH_TO_FILE):
    
