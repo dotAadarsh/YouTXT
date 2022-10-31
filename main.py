@@ -18,13 +18,10 @@ st.set_page_config(
 with st.sidebar:
     st.write("Created for Learn Build Teach Hackathon 2022")
     st.info("Please keep the video duration <~3min [Longer the duration, the longer it takes!]")
-    with st.expander("Thinking of making"):
-        st.write("- Verifying of the authenticity of the news/video\n - Voice enabled coding companion")
-
-
     
-openai.api_key = st.secrets["OPENAI_API_KEY"]
-DEEPGRAM_API_KEY = st.secrets["DEEPGRAM_API_KEY"]
+
+openai.api_key = "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"
+DEEPGRAM_API_KEY = "2f2de989cfc17bd318ec2e40214ed20f71a7baa2"
 
 st.header("YouTXT")
 video_url = st.text_input("Please enter the YouTube URL", value= "https://youtu.be/kibx5BR6trA")
@@ -122,3 +119,7 @@ async def main(video_url):
     return PATH_TO_FILE
 
 response = asyncio.run(transcribe(asyncio.run(main(video_url))))
+with st.sidebar:
+    with st.expander("Thinking of making"):
+        st.write("- Verifying of the authenticity of the news/video\n - Voice enabled coding companion\n - Multilingual Transcript")
+
