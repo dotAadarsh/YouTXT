@@ -19,31 +19,13 @@ with st.sidebar:
     st.write("Created for Learn Build Teach Hackathon 2022")
     st.info("Please keep the video duration <~3min [Longer the duration, the longer it takes!]")
     
-openai.api_key = st.secrets["OPENAI_API_KEY"]
-DEEPGRAM_API_KEY = st.secrets["DEEPGRAM_API_KEY"]
+openai.api_key = "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"
+DEEPGRAM_API_KEY = "2f2de989cfc17bd318ec2e40214ed20f71a7baa2"
 
 st.header("YouTXT")
 video_url = st.text_input("Please enter the YouTube URL", value= "https://youtu.be/JKxlsvZXG7c")
 with st.sidebar:
     st.video(video_url)
-
-def markdown(text):
-    with st.expander("Markdown editor"):
-        c1, c2 = st.columns([3, 1])
-        c2.subheader("Parameters")
-        
-        with c1:
-            content = st_quill(
-                value=text,
-                placeholder="Write your text here",
-                html=c2.checkbox("Return HTML", False),
-                readonly=c2.checkbox("Read only", False),
-                key="quill",
-            )
-
-            if content:
-                st.subheader("Content")
-                st.write(content)
 
 async def transcribe(PATH_TO_FILE):
    
@@ -95,6 +77,23 @@ async def transcribe(PATH_TO_FILE):
             time = int(search[keyword])
             st.video(video_url, start_time=time)
     
+    with st.expander("Markdown editor"):
+        c1, c2 = st.columns([3, 1])
+        c2.subheader("Parameters")
+
+        with c1:
+            content = st_quill(
+                value=response["results"]["channels"][0]["alternatives"][0]["transcript"],
+                placeholder="Write your text here",
+                html=c2.checkbox("Return HTML", False),
+                readonly=c2.checkbox("Read only", False),
+                key="quill",
+            )
+
+            if content:
+                st.subheader("Content")
+                st.write(content)
+
     return response
 
 async def main(video_url):
@@ -113,8 +112,9 @@ async def main(video_url):
 
     base = Path.cwd()
     PATH_TO_FILE = f"{base}/{filename}"
+    with st.sidebar:
+        st.audio(PATH_TO_FILE)
     
     return PATH_TO_FILE
 
 response = asyncio.run(transcribe(asyncio.run(main(video_url))))
-markdown(response["results"]["channels"][0]["alternatives"][0]["transcript"])
