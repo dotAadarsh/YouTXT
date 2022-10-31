@@ -18,9 +18,10 @@ st.set_page_config(
 with st.sidebar:
     st.write("Created for Learn Build Teach Hackathon 2022")
     st.info("Please keep the video duration <~3min [Longer the duration, the longer it takes!]")
+    st.success("")
     
-openai.api_key = "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"
-DEEPGRAM_API_KEY = "2f2de989cfc17bd318ec2e40214ed20f71a7baa2"
+openai.api_key = st.secrets["OPENAI_API_KEY"]
+DEEPGRAM_API_KEY = st.secrets["DEEPGRAM_API_KEY"]
 
 st.header("YouTXT")
 video_url = st.text_input("Please enter the YouTube URL", value= "https://youtu.be/JKxlsvZXG7c")
