@@ -3,6 +3,7 @@ from deepgram import Deepgram
 import streamlit as st
 from pathlib import Path
 from streamlit_quill import st_quill
+from itranslate import itranslate as itrans
 
 st.set_page_config(
     page_title="YouTXT",
@@ -38,12 +39,12 @@ async def transcribe(PATH_TO_FILE):
         response = await deepgram.transcription.prerecorded(source, {'summarize': True, 'punctuate': True, "diarize": True, "utterances": True })
         # st.json(response, expanded=False)
         response_result_json = json.dumps(response, indent=4)
-        
+        text = response["results"]["channels"][0]["alternatives"][0]["transcript"]
         col1, col2 = st.columns(2)
         with col1: 
             
             with st.expander("Transcript"):
-                st.write(response["results"]["channels"][0]["alternatives"][0]["transcript"])
+                st.write(text)
         with col2:
             
             with st.expander("Summary/Keywords"):
@@ -53,7 +54,7 @@ async def transcribe(PATH_TO_FILE):
                 st.header("Keywords")
                 response_openai = openai.Completion.create(
                     model="text-davinci-002",
-                    prompt=f'Extract keywords from this text:\n\n{response["results"]["channels"][0]["alternatives"][0]["transcript"]}',
+                    prompt=f'Extract keywords from this text:\n\n{text}',
                     temperature=0.3,
                     max_tokens=60,
                     top_p=1.0,
@@ -65,6 +66,11 @@ async def transcribe(PATH_TO_FILE):
                 for item in keywords_results:
                     st.write(item)
 
+    with st.expander("Translate the transcript"):
+        st.info("Tamil - ta, Russian - ru, German - de, Japanese - ja [More lang will be added]")
+        options = st.selectbox("Select the language", ("ta", "ru", "de", "ja"))
+        st.text_area("Trnaslated Text", itrans(text, to_lang = options))
+    
     with st.expander("Search the video"):
         search = dict()
         
@@ -83,7 +89,7 @@ async def transcribe(PATH_TO_FILE):
 
         with c1:
             content = st_quill(
-                value=response["results"]["channels"][0]["alternatives"][0]["transcript"],
+                value=text,
                 placeholder="Write your text here",
                 html=c2.checkbox("Return HTML", False),
                 readonly=c2.checkbox("Read only", False),
@@ -93,7 +99,7 @@ async def transcribe(PATH_TO_FILE):
             if content:
                 st.subheader("Content")
                 st.write(content)
-
+    
     return response
 
 async def main(video_url):
