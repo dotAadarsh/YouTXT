@@ -4,6 +4,6 @@ et-xmlfile==1.1.0
 ffmpeg-python==0.2.0
 itranslate==0.1.2
 openai==0.24.0
-streamlit==1.13.0
+streamlit==1.27.0
 streamlit-quill==0.0.3
 youtube-dl==2021.12.17
