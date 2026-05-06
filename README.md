@@ -9,7 +9,8 @@ YouTXT is an app that convert any YouTube video to text and it provides the belo
 - Search [Search the word in the video]
 - Markdown editor
 
-  
+> 🏆 Winner of the Learn Build Teach x Deepgram Hackathon.  
+> Featured in Deepgram's winner announcement: [Announcing our LBT Hackathon Winners!](https://dev.to/deepgram/announcing-our-lbt-hackathon-winners-3doe)  
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/dotaadarsh/YouTXT)
 
