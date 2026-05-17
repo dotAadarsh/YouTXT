@@ -7,3 +7,4 @@ openai==0.24.0
 streamlit==1.13.0
 streamlit-quill==0.0.3
 youtube-dl==2021.12.17
+aiohttp>=3.9.4 # not directly required, pinned by Snyk to avoid a vulnerability
